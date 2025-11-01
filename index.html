@@ -17,6 +17,14 @@
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     
+    <!-- Animated Background Elements -->
+    <div class="animated-bg">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+      <div class="mesh-gradient"></div>
+    </div>
+    
     <header class="site-header" role="banner">
       <div class="container header-inner">
         <a href="#" class="brand" aria-label="Home">Rishi Dhama</a>
@@ -38,10 +46,11 @@
 
     <main id="main">
       <section class="hero">
+        <div class="particle-container" id="particles"></div>
         <div class="container hero-inner">
           <div class="hero-content">
             <p class="hero-label">Software Development Engineer</p>
-            <h1>Building Secure, Scalable, and Impactful Software</h1>
+            <h1 class="gradient-text">Building Secure, Scalable, and Impactful Software</h1>
             <div class="hero-actions">
               <a class="btn btn-primary" href="https://drive.google.com/file/d/1alEDqS-xwyzoSphqOT_9yGkgum0mU7Bv/view?usp=drive_link" target="_blank" rel="noreferrer">View Resume</a>
               <a class="btn btn-secondary" href="#projects">View Projects</a>
@@ -49,6 +58,7 @@
           </div>
           <div class="hero-visual">
             <div class="avatar-container">
+              <div class="avatar-glow"></div>
               <div class="avatar">RD</div>
             </div>
           </div>
@@ -81,7 +91,7 @@
             <h2>Technologies I Work With</h2>
           </div>
           <div class="skills-grid">
-            <div class="skill-category">
+            <div class="skill-category glass-card">
               <h3>Programming Languages</h3>
               <div class="skill-tags">
                 <span class="skill-tag"><i class="devicon-c-plain colored"></i> C</span>
@@ -91,14 +101,14 @@
                 <span class="skill-tag"><i class="devicon-php-plain colored"></i> PHP</span>
               </div>
             </div>
-            <div class="skill-category">
+            <div class="skill-category glass-card">
               <h3>Web Technologies</h3>
               <div class="skill-tags">
                 <span class="skill-tag"><i class="devicon-html5-plain colored"></i> HTML</span>
                 <span class="skill-tag"><i class="devicon-css3-plain colored"></i> CSS</span>
               </div>
             </div>
-            <div class="skill-category">
+            <div class="skill-category glass-card">
               <h3>Frameworks & Libraries</h3>
               <div class="skill-tags">
                 <span class="skill-tag"><i class="devicon-react-plain colored"></i> React.js</span>
@@ -107,14 +117,14 @@
                 <span class="skill-tag"><i class="devicon-tailwindcss-plain colored"></i> Tailwind CSS</span>
               </div>
             </div>
-            <div class="skill-category">
+            <div class="skill-category glass-card">
               <h3>Database</h3>
               <div class="skill-tags">
                 <span class="skill-tag"><i class="devicon-mysql-plain colored"></i> MySQL</span>
                 <span class="skill-tag"><i class="devicon-mongodb-plain colored"></i> MongoDB</span>
               </div>
             </div>
-            <div class="skill-category">
+            <div class="skill-category glass-card">
               <h3>Tools & Platforms</h3>
               <div class="skill-tags">
                 <span class="skill-tag"><i class="devicon-vscode-plain colored"></i> VS Code</span>
@@ -134,8 +144,9 @@
             <h2>Featured Work</h2>
           </div>
           <div class="projects-grid">
-            <article class="project-card">
+            <article class="project-card glass-card">
               <div class="project-image">
+                <div class="project-overlay"></div>
                 <img src="./assets/securevault.png" alt="SecureVault" loading="lazy" />
               </div>
               <div class="project-content">
@@ -158,8 +169,9 @@
               </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card glass-card">
               <div class="project-image">
+                <div class="project-overlay"></div>
                 <img src="./assets/algoviz.png" alt="AlgoViz" loading="lazy" />
               </div>
               <div class="project-content">
@@ -188,21 +200,21 @@
             <h2>Education</h2>
           </div>
           <div class="education-list">
-            <div class="education-item">
+            <div class="education-item glass-card">
               <div class="edu-header">
                 <h3>Graphic Era University, Dehradun</h3>
                 <span class="edu-year">Expected 2026</span>
               </div>
               <p class="edu-details">B.Tech in Computer Science • CGPA: 8.1/10</p>
             </div>
-            <div class="education-item">
+            <div class="education-item glass-card">
               <div class="edu-header">
                 <h3>Salwan Public School, Delhi</h3>
                 <span class="edu-year">2020</span>
               </div>
               <p class="edu-details">Class XII, CBSE • 78.40%</p>
             </div>
-            <div class="education-item">
+            <div class="education-item glass-card">
               <div class="edu-header">
                 <h3>Salwan Public School, Delhi</h3>
                 <span class="edu-year">2018</span>
@@ -222,7 +234,7 @@
           <div class="contact-wrapper">
             <p class="contact-intro">Have a question or want to work together? Send me a message!</p>
             
-            <form id="contactForm" class="contact-form" novalidate>
+            <form id="contactForm" class="contact-form glass-card" novalidate>
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Your name" required aria-required="true" aria-describedby="name-error">
@@ -250,15 +262,15 @@
             </form>
             
             <div class="contact-social">
-              <a href="mailto:rishidhama26@gmail.com" class="social-link">
+              <a href="mailto:rishidhama26@gmail.com" class="social-link glass-card">
                 <span class="social-icon">✉️</span>
                 <span>Email</span>
               </a>
-              <a href="https://www.linkedin.com/in/rishi-dhama" target="_blank" rel="noreferrer" class="social-link">
+              <a href="https://www.linkedin.com/in/rishi-dhama" target="_blank" rel="noreferrer" class="social-link glass-card">
                 <i class="devicon-linkedin-plain colored"></i>
                 <span>LinkedIn</span>
               </a>
-              <a href="https://github.com/rishidhama" target="_blank" rel="noreferrer" class="social-link">
+              <a href="https://github.com/rishidhama" target="_blank" rel="noreferrer" class="social-link glass-card">
                 <i class="devicon-github-original"></i>
                 <span>GitHub</span>
               </a>

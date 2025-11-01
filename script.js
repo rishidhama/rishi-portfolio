@@ -1,6 +1,39 @@
 // Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Particle System
+function createParticles() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+
+  const particleCount = 50;
+  const particles = [];
+
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    const size = Math.random() * 3 + 2;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 15 + 's';
+    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    
+    const colors = ['#7c3aed', '#2563eb', '#8b5cf6', '#3b82f6'];
+    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+    
+    container.appendChild(particle);
+    particles.push(particle);
+  }
+}
+
+// Initialize particles when page loads
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', createParticles);
+} else {
+  createParticles();
+}
+
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
 const saved = localStorage.getItem('portfolio_theme');
@@ -68,18 +101,23 @@ const observer = new IntersectionObserver((entries) => {
 
 sections.forEach(section => observer.observe(section));
 
-// Scroll Reveal
+// Enhanced Scroll Reveal
 const revealElements = document.querySelectorAll('.section-header, .project-card, .education-item, .skill-category');
 const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+  entries.forEach((entry, index) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-      revealObserver.unobserve(entry.target);
+      setTimeout(() => {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }, index * 100);
     }
   });
 }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
 
-revealElements.forEach(el => revealObserver.observe(el));
+revealElements.forEach(el => {
+  el.classList.add('revealed');
+  revealObserver.observe(el);
+});
 
 // Project Images
 document.querySelectorAll('.project-image img').forEach(img => {
