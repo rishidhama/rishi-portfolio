@@ -201,8 +201,37 @@
       <section id="contact" class="section">
         <div class="container contact-panel">
           <h2>Contact</h2>
+          <p class="contact-sub">Have a question or want to work together? Send me a message!</p>
+          
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required aria-required="true" aria-describedby="name-error">
+              <span class="error-message" id="name-error" role="alert"></span>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your.email@example.com" required aria-required="true" aria-describedby="email-error">
+              <span class="error-message" id="email-error" role="alert"></span>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project or just say hello..." rows="5" required aria-required="true" aria-describedby="message-error"></textarea>
+              <span class="error-message" id="message-error" role="alert"></span>
+            </div>
+            
+            <button type="submit" class="btn primary" id="submitBtn">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loader" aria-hidden="true"></span>
+            </button>
+            
+            <div class="form-message" id="formMessage" role="alert"></div>
+          </form>
+          
           <div class="contact-links">
-            <a href="mailto:rishidhama26@gmail.com" class="btn primary"><span aria-hidden="true">✉️</span> Email</a>
+            <a href="mailto:rishidhama26@gmail.com" class="btn"><span aria-hidden="true">✉️</span> Email Directly</a>
             <a href="https://www.linkedin.com/in/rishi-dhama" target="_blank" rel="noreferrer" class="btn"><i class="devicon-linkedin-plain colored" aria-hidden="true"></i> LinkedIn</a>
             <a href="https://github.com/rishidhama" target="_blank" rel="noreferrer" class="btn"><i class="devicon-github-original" aria-hidden="true"></i> GitHub</a>
           </div>
@@ -320,6 +349,165 @@
           window.scrollTo(0, 0);
         } else {
           window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      // Contact Form Handling
+      const contactForm = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const formMessage = document.getElementById('formMessage');
+      
+      // EmailJS Configuration (optional - set these if using EmailJS)
+      // Get these from https://www.emailjs.com/ after setting up an account
+      const EMAILJS_SERVICE_ID = ''; // e.g., 'service_xyz'
+      const EMAILJS_TEMPLATE_ID = ''; // e.g., 'template_abc'
+      const EMAILJS_PUBLIC_KEY = ''; // e.g., 'your_public_key'
+      const USE_EMAILJS = EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY;
+      
+      // Load EmailJS if configured
+      if (USE_EMAILJS) {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+        script.onload = () => {
+          if (window.emailjs) {
+            window.emailjs.init(EMAILJS_PUBLIC_KEY);
+          }
+        };
+        document.head.appendChild(script);
+      }
+
+      // Validation helpers
+      const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      };
+
+      const showError = (fieldId, message) => {
+        const errorElement = document.getElementById(`${fieldId}-error`);
+        if (errorElement) {
+          errorElement.textContent = message;
+        }
+      };
+
+      const clearError = (fieldId) => {
+        const errorElement = document.getElementById(`${fieldId}-error`);
+        if (errorElement) {
+          errorElement.textContent = '';
+        }
+      };
+
+      const clearAllErrors = () => {
+        ['name', 'email', 'message'].forEach(field => clearError(field));
+      };
+
+      const showFormMessage = (message, type) => {
+        formMessage.textContent = message;
+        formMessage.className = `form-message ${type}`;
+        formMessage.style.display = 'block';
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        if (type === 'success') {
+          contactForm.reset();
+          clearAllErrors();
+        }
+      };
+
+      const hideFormMessage = () => {
+        formMessage.style.display = 'none';
+        formMessage.className = 'form-message';
+      };
+
+      // Real-time validation
+      ['name', 'email', 'message'].forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+          field.addEventListener('blur', () => {
+            const value = field.value.trim();
+            if (!value) {
+              showError(fieldId, `${fieldId === 'email' ? 'Email' : fieldId.charAt(0).toUpperCase() + fieldId.slice(1)} is required`);
+            } else if (fieldId === 'email' && !validateEmail(value)) {
+              showError(fieldId, 'Please enter a valid email address');
+            } else {
+              clearError(fieldId);
+            }
+          });
+
+          field.addEventListener('input', () => {
+            if (field.value.trim()) {
+              clearError(fieldId);
+              if (fieldId === 'email' && validateEmail(field.value.trim())) {
+                clearError(fieldId);
+              }
+            }
+            hideFormMessage();
+          });
+        }
+      });
+
+      // Form submission
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearAllErrors();
+        hideFormMessage();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        // Validate
+        let isValid = true;
+        if (!name) {
+          showError('name', 'Name is required');
+          isValid = false;
+        }
+        if (!email) {
+          showError('email', 'Email is required');
+          isValid = false;
+        } else if (!validateEmail(email)) {
+          showError('email', 'Please enter a valid email address');
+          isValid = false;
+        }
+        if (!message) {
+          showError('message', 'Message is required');
+          isValid = false;
+        }
+
+        if (!isValid) {
+          showFormMessage('Please fix the errors above', 'error');
+          return;
+        }
+
+        // Show loading state
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
+        try {
+          if (USE_EMAILJS && window.emailjs) {
+            // Use EmailJS if configured
+            await window.emailjs.send(
+              EMAILJS_SERVICE_ID,
+              EMAILJS_TEMPLATE_ID,
+              {
+                from_name: name,
+                from_email: email,
+                message: message,
+                to_email: 'rishidhama26@gmail.com'
+              }
+            );
+            showFormMessage('Thank you! Your message has been sent successfully.', 'success');
+          } else {
+            // Fallback to mailto
+            const subject = encodeURIComponent(`Portfolio Contact: ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            window.location.href = `mailto:rishidhama26@gmail.com?subject=${subject}&body=${body}`;
+            showFormMessage('Opening your email client... If it didn\'t open, please email rishidhama26@gmail.com directly.', 'success');
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+          showFormMessage('Something went wrong. Please try again or email me directly at rishidhama26@gmail.com', 'error');
+        } finally {
+          submitBtn.classList.remove('loading');
+          submitBtn.disabled = false;
         }
       });
     </script>
