@@ -230,7 +230,6 @@ html[data-theme="dark"] .site-header {
 
 .hero-actions {
   display: flex;
-  justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
 }
@@ -813,6 +812,10 @@ html[data-theme="dark"] .site-header {
     text-align: center;
   }
 
+  .hero-actions {
+    justify-content: center;
+  }
+  
   .projects-grid {
     grid-template-columns: 1fr;
   }
