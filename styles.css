@@ -1305,3 +1305,111 @@ html[data-theme="dark"] .form-group textarea {
   }
 }
 
+/* Publications Section */
+.publications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.publication-item {
+  padding: 24px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.publication-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] .publication-item:hover {
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+}
+
+.pub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.pub-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+.pub-status {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--primary);
+  color: white;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pub-authors,
+.pub-details,
+.pub-conference {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.pub-authors strong,
+.pub-details strong,
+.pub-conference strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Achievements Section */
+.achievements-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.achievement-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  align-items: flex-start;
+}
+
+.achievement-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] .achievement-item:hover {
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+}
+
+.achievement-icon {
+  font-size: 32px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.achievement-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.achievement-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
