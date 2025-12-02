@@ -767,9 +767,24 @@ html[data-theme="dark"] .section h2 {
 .project-description {
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   flex: 1;
   font-size: 15px;
+}
+
+.project-impact {
+  color: var(--primary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  background: rgba(124, 58, 237, 0.08);
+  border-left: 3px solid var(--primary);
+  border-radius: 6px;
+}
+
+.project-impact strong {
+  font-weight: 600;
 }
 
 .project-tech {
