@@ -1,4 +1,3 @@
-// Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // Particle System
